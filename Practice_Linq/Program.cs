@@ -96,33 +96,23 @@ namespace Practice_Linq
         {
             //Query 4: Вивести всі матчі збірної Германії з 2018 року по 2020 рік (включно), в яких вона на виїзді програла.
 
-            var selectedGames = games;   // Корегуємо запит !!!
-
-
+            var selectedGames = games.Where(u=>u.Date.Year>=2018&&u.Date.Year<=2021&&u.Away_team=="Germany"&&u.Away_score<u.Home_score);   // Катя запит !!!
             // Перевірка
             Console.WriteLine("\n======================== QUERY 4 ========================");
-
-            // див. приклад як має бути виведено:
-
-
-        }
+			// див. приклад як має бути виведено:
+			string result = "";
+			foreach (var game in selectedGames)
+			{
+				result += game.ToString();
+			}
+			Console.WriteLine(result);
+		}
 
         // Запит 5
         static void Query5(List<FootballGame> games)
         {
-            //Query 5: Вивести всі кваліфікаційні матчі (UEFA Euro qualification), які відбулися у Києві чи у Харкові, а також за умови перемоги української збірної.
-
-
-            var selectedGames = games;  // Корегуємо запит !!!
-
-
-            // Перевірка
-            Console.WriteLine("\n======================== QUERY 5 ========================");
-
-            // див. приклад як має бути виведено:
-
-
-        }
+            
+		}
 
         // Запит 6
         static void Query6(List<FootballGame> games)
