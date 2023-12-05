@@ -47,7 +47,7 @@ namespace Practice_Linq
         static void Query1(List<FootballGame> games)
         {
             //Query 1: Вивести всі матчі, які відбулися в Україні у 2012 році.
-            var selectedGames = games.Where(u=>u.Country== "Ukraine"); // Корегуємо запит !!!
+            var selectedGames = games.Where(u=>u.Country== "Ukraine"&&u.Date.Year==2012); // Корегуємо запит !!!
             // Перевірка
             Console.WriteLine("\n======================== QUERY 1 ========================");
             // див. приклад як має бути виведено:
@@ -63,7 +63,7 @@ namespace Practice_Linq
         static void Query2(List<FootballGame> games)
         {
             //Query 2: Вивести Friendly матчі збірної Італії, які вона провела з 2020 року.  
-            var selectedGames = games.Where(u=>u.Tournament== "Friendly"&&(u.Home_team == "Italy"||u.Away_team== "Italy")); // Корегуємо запит !!!
+            var selectedGames = games.Where(u=>u.Tournament== "Friendly"&&u.Date.Year>=2020&&(u.Home_team == "Italy"||u.Away_team== "Italy")); // Корегуємо запит !!!
             // Перевірка
             Console.WriteLine("\n======================== QUERY 2 ========================");
 			// див. приклад як має бути виведено:
@@ -79,7 +79,7 @@ namespace Practice_Linq
         static void Query3(List<FootballGame> games)
         {
             //Query 3: Вивести всі домашні матчі збірної Франції за 2021 рік, де вона зіграла у нічию.
-            var selectedGames = games.Where(u => u.Date.Year ==2021 && u.Home_team == "France" &&u.Country=="France");   // Корегуємо запит !!!
+            var selectedGames = games.Where(u => u.Date.Year ==2021 && u.Home_team == "France" &&u.Country=="France"&&u.Home_score==u.Away_score);   // Корегуємо запит !!!
             // Перевірка
             Console.WriteLine("\n======================== QUERY 3 ========================");
 			// див. приклад як має бути виведено:
@@ -96,7 +96,7 @@ namespace Practice_Linq
         {
             //Query 4: Вивести всі матчі збірної Германії з 2018 року по 2020 рік (включно), в яких вона на виїзді програла.
 
-            var selectedGames = games.Where(u=>u.Date.Year>=2018&&u.Date.Year<=2021&&u.Away_team=="Germany"&&u.Away_score<u.Home_score);   // Катя запит !!!
+            var selectedGames = games.Where(u=>u.Date.Year>=2018&&u.Date.Year<2021&&u.Away_team=="Germany"&&u.Away_score<u.Home_score);   // Катя запит !!!
             // Перевірка
             Console.WriteLine("\n======================== QUERY 4 ========================");
 			// див. приклад як має бути виведено:
@@ -130,17 +130,17 @@ namespace Practice_Linq
         {
             //Query 6: Вивести всі матчі останнього чемпіоната світу з футболу (FIFA World Cup), починаючи з чвертьфіналів (тобто останні 8 матчів).
             //Матчі мають відображатися від фіналу до чвертьфіналів (тобто у зворотній послідовності).
-
-            var selectedGames = games;   // Корегуємо запит !!!
-
-
+            var selectedGames = games.Where(u=>u.Tournament== "FIFA World Cup").TakeLast(8).Reverse();   // Корегуємо запит !!!
             // Перевірка
             Console.WriteLine("\n======================== QUERY 6 ========================");
-
-            // див. приклад як має бути виведено:
-
-
-        }
+			// див. приклад як має бути виведено:
+			string result = "";
+			foreach (var game in selectedGames)
+			{
+				result += game.ToString();
+			}
+			Console.WriteLine(result);
+		}
 
         // Запит 7
         static void Query7(List<FootballGame> games)
