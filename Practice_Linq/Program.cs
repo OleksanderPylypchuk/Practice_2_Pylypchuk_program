@@ -145,17 +145,14 @@ namespace Practice_Linq
         // Запит 7
         static void Query7(List<FootballGame> games)
         {
-            //Query 7: Вивести перший матч у 2023 році, в якому збірна України виграла.
-
-            FootballGame g = null;   // Корегуємо запит !!!
-
-
-            // Перевірка
-            Console.WriteLine("\n======================== QUERY 7 ========================");
-
+			//Query 7: Вивести перший матч у 2023 році, в якому збірна України виграла.
+			FootballGame g = games.FirstOrDefault(u => u.Date.Year == 2023 && 
+                ((u.Away_team=="Ukraine"&&u.Away_score>u.Home_score)||(u.Home_team=="Ukraine"&&u.Home_score>u.Away_score)));
+            // Корегуємо запит !!!
+			// Перевірка
+			Console.WriteLine("\n======================== QUERY 7 ========================");
+            Console.WriteLine(g);
             // див. приклад як має бути виведено:
-
-
         }
 
         // Запит 8
