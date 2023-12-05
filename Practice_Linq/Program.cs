@@ -67,7 +67,12 @@ namespace Practice_Linq
             // Перевірка
             Console.WriteLine("\n======================== QUERY 2 ========================");
 			// див. приклад як має бути виведено:
-
+			string result = "";
+			foreach (var game in selectedGames)
+			{
+				result += game.ToString();
+			}
+			Console.WriteLine(result);
 		}
 
         // Запит 3
