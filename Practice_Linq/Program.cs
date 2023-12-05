@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics.Metrics;
+using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Practice_Linq
 {
@@ -54,7 +56,7 @@ namespace Practice_Linq
             string result = "";
             foreach(var game in selectedGames)
             {
-                result+= game.ToString();
+                result+= $"{game.Date.ToString("d")} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}\n";
             }
             Console.WriteLine(result);
         }
@@ -70,7 +72,7 @@ namespace Practice_Linq
 			string result = "";
 			foreach (var game in selectedGames)
 			{
-				result += game.ToString();
+				result += $"{game.Date.ToString("d")} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}\n";
 			}
 			Console.WriteLine(result);
 		}
@@ -86,7 +88,7 @@ namespace Practice_Linq
 			string result = "";
 			foreach (var game in selectedGames)
 			{
-				result += game.ToString();
+				result += $"{game.Date.ToString("d")} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}\n";
 			}
 			Console.WriteLine(result);
 		}
@@ -103,7 +105,7 @@ namespace Practice_Linq
 			string result = "";
 			foreach (var game in selectedGames)
 			{
-				result += game.ToString();
+				result += $"{game.Date.ToString("d")} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}\n";
 			}
 			Console.WriteLine(result);
 		}
@@ -120,7 +122,7 @@ namespace Practice_Linq
 			string result = "";
 			foreach (var game in selectedGames)
 			{
-				result += game.ToString();
+				result += $"{game.Date.ToString("d")} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}\n";
 			}
 			Console.WriteLine(result);
 		}
@@ -137,7 +139,7 @@ namespace Practice_Linq
 			string result = "";
 			foreach (var game in selectedGames)
 			{
-				result += game.ToString();
+				result += $"{game.Date.ToString("d")} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}\n";
 			}
 			Console.WriteLine(result);
 		}
@@ -151,7 +153,8 @@ namespace Practice_Linq
             // Корегуємо запит !!!
 			// Перевірка
 			Console.WriteLine("\n======================== QUERY 7 ========================");
-            Console.WriteLine(g);
+			string result = $"{g.Date.ToString("d")} {g.Home_team} - {g.Away_team}, Score: {g.Home_score} - {g.Away_score}, Country: {g.Country}\n";
+			Console.WriteLine(result);
             // див. приклад як має бути виведено:
         }
 
@@ -160,16 +163,23 @@ namespace Practice_Linq
         {
             //Query 8: Перетворити всі матчі Євро-2012 (UEFA Euro), які відбулися в Україні, на матчі з наступними властивостями:
             // MatchYear - рік матчу, Team1 - назва приймаючої команди, Team2 - назва гостьової команди, Goals - сума всіх голів за матч
-
-            var selectedGames = games;   // Корегуємо запит !!!
-
+            var selectedGames = games.Where(u => u.Tournament == "UEFA Euro" && u.Date.Year == 2012 && u.Country == "Ukraine").Select(x => new
+            {
+                Year = x.Date.Year,
+                Team1 = x.Home_team,
+                Team2 = x.Away_team,
+                Goals = x.Away_score + x.Home_score
+            });   // Корегуємо запит !!!
             // Перевірка
             Console.WriteLine("\n======================== QUERY 8 ========================");
-
-            // див. приклад як має бути виведено:
-
-
-        }
+			// див. приклад як має бути виведено:
+			string result = "";
+			foreach (var game in selectedGames)
+			{
+                result += $"{game.Year} {game.Team1} - {game.Team2}, Goals: {game.Goals}\n";
+			}
+			Console.WriteLine(result);
+		}
 
 
         // Запит 9
